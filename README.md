@@ -49,6 +49,9 @@ While you can run the application with docker container, containerization helps 
 
 ## Future Scope
 - Currently Authentication system implementation is ongoing but stuck with a possible issue with Spring boot
+- H2 can be replaced with other database like MySQL
+- Validation can be applied for various use cases like file format
+- Unit testing is not yet attempted 
 
 Want to contribute? Great!
 Pleas feel free to fork a branch.
