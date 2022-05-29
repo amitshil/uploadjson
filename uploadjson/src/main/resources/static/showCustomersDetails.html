@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- var restaurant = document.getElementById("restaurantId"); -->
+
+    <link rel="stylesheet" href="css/home_page.css">
+
+    <script type="text/javascript">
+
+        function generateTable(customers) {
+
+            //Create a HTML Table element.
+            var table = document.createElement("TABLE");
+            table.border = "1";
+
+            //Get the count of columns.
+            var columnCount = customers[0].length;
+
+            //Add the header row.
+            var row = table.insertRow(-1);
+            for (var i = 0; i < columnCount; i++) {
+                var headerCell = document.createElement("TH");
+                headerCell.innerHTML = customers[0][i];
+                row.appendChild(headerCell);
+            }
+
+            //Add the data rows.
+            for (var i = 1; i < customers.length; i++) {
+                row = table.insertRow(-1);
+                for (var j = 0; j < columnCount; j++) {
+                    var cell = row.insertCell(-1);
+                    cell.innerHTML = customers[i][j];
+                }
+            }
+
+            var dvTable = document.getElementById("dvTable");
+            dvTable.innerHTML = "";
+            dvTable.appendChild(table);
+        }
+        function showDetails() {
+            var request = new XMLHttpRequest();
+            request.addEventListener("readystatechange", function() {
+                if(this.readyState === 4) {
+                    console.log(this.response)
+                    var customerInfo = JSON.parse(this.response);
+                    var customers = [];
+                    customers.push(["Id", "User Id", "Title", "body"]);
+                    for(var i = 0; i<customerInfo.customerList.length; i++){
+                        var customer = customerInfo.customerList[i];
+                        console.log(customer.title);
+                        customers.push([customer.id,customer.userId,customer.title,customer.body]);
+                    }
+
+                    generateTable(customers);
+                }
+            });
+            request.open("GET", 'http://localhost:8080/showCustomersInfo');
+            request.send();
+        }
+
+    </script>
+</head>
+
+<body	class="body" onload="showDetails()">
+
+
+
+<a style="float:right; margin: 20px 50px 0px 0px" href='index.html'><button type="button">Home</button></a>
+<br>
+<div style="text-align: center; margin: 0px 0px 0px 50px;">
+        <h1> Customer Details  </h1>
+</div>
+
+<hr />
+<div id="dvTable" style="margin: 0px 0px 0px 50px;"></div>
+
+
+</body>
+
+</html>

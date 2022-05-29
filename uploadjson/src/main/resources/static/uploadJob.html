@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- var restaurant = document.getElementById("restaurantId"); -->
+
+    <link rel="stylesheet" href="css/home_page.css">
+
+    <script type="text/javascript">
+
+        function upload() {
+            var formData = new FormData();
+            var clientId = Math.floor((Math.random() * 1000) + 1);
+            document.getElementById("client_info").innerHTML = 'Client id : ' + clientId;
+            formData.append("file", document.forms['form1'].file.files[0]);
+            formData.append('clientId', clientId.toString());
+            const response = new XMLHttpRequest();
+            response.open("POST", 'http://localhost:8080/upload');
+            response.send(formData);
+            document.getElementById("status").innerHTML = 'Job Status : submitted ';
+
+        }
+
+    </script>
+</head>
+
+<body	class="body" >
+
+
+
+<a style="float:right; margin: 20px 50px 0px 0px" href='index.html'><button type="button">Home</button></a>
+<br>
+<div style="margin: 0px 0px 0px 50px;">
+    <form name="form1" id="form1" enctype="multipart/form-data" >
+        <h1> Upload Customer Details  </h1>
+        <label><b>Select the json file: </b>
+            <br><br>
+        </label>
+        <input type="file" name="file" id="file" placeholder="File path">
+        <br><br>
+        <button onclick="upload();" type="button">Upload</button>
+        <br><br>
+    </form>
+
+    <h3 id="client_info"></h3>
+    <h3 id="status" style="color:black; font-size: 15px; font-weight: bold;"></h3>
+</div>
+
+
+</body>
+
+</html>

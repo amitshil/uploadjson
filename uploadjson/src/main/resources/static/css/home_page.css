@@ -1,0 +1,13 @@
+.body{
+    background-color: #d3f2ed;
+}
+
+
+.box-shadow-hover:hover {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    background: red;
+}
+
+.pointer {
+    cursor: pointer;
+}
