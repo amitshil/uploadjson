@@ -14,9 +14,9 @@
             document.getElementById("client_info").innerHTML = 'Client id : ' + clientId;
             formData.append("file", document.forms['form1'].file.files[0]);
             formData.append('clientId', clientId.toString());
-            const response = new XMLHttpRequest();
-            response.open("POST", 'http://localhost:8080/upload');
-            response.send(formData);
+            const request = new XMLHttpRequest();
+            request.open("POST", 'http://localhost:8080/upload');
+            request.send(formData);
             document.getElementById("status").innerHTML = 'Job Status : submitted ';
 
         }
